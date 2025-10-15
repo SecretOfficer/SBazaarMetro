@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - SBazaarMetro</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS and Animations -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .font-brand {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FAQ Animations */
+        .faq-answer {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.44, 0, 0.56, 1);
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+            opacity: 1;
+            padding: 1rem;
+            padding-left: 2rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .faq-icon {
+            transition: transform 0.4s cubic-bezier(0.44, 0, 0.56, 1);
+        }
+
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .faq-item button {
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-item.active {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <nav class="container mx-auto px-4 lg:px-6 py-2">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center py-1">
+                    <img src="logo.jpg" alt="Bazaar Metro Logo" class="h-20 w-auto object-contain transform hover:scale-105 transition-transform duration-300" style="max-width: 300px;">
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-rose-600 transition duration-300">Home</a>
+                    <a href="index.html#categories" class="text-gray-600 hover:text-rose-600 transition duration-300">Categories</a>
+                    <a href="index.html#store-locator" class="text-gray-600 hover:text-rose-600 transition duration-300">Store Locator</a>
+                    <a href="faq.html" class="text-rose-600 font-semibold">FAQ</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="lg:hidden text-gray-600 hover:text-rose-600">
+                        <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                        <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200">
+            <a href="index.html" class="block py-3 px-4 text-gray-600 hover:bg-rose-50 hover:text-rose-600">Home</a>
+            <a href="index.html#categories" class="block py-3 px-4 text-gray-600 hover:bg-rose-50 hover:text-rose-600">Categories</a>
+            <a href="index.html#store-locator" class="block py-3 px-4 text-gray-600 hover:bg-rose-50 hover:text-rose-600">Store Locator</a>
+            <a href="faq.html" class="block py-3 px-4 text-rose-600 bg-rose-50">FAQ</a>
+        </div>
+    </header>
+
+    <main class="py-16 min-h-screen">
+        <div class="container mx-auto px-4 lg:px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12 reveal">
+                    <h1 class="text-7xl font-brand font-bold bg-gradient-to-b from-rose-600 to-rose-800 text-transparent bg-clip-text mb-4">FAQ</h1>
+                    <h2 class="text-3xl font-semibold text-gray-800 mb-4">Questions & Answers</h2>
+                    <p class="text-gray-600">Have more questions? Don't hesitate to reach out to us.</p>
+                </div>
+                
+                <div class="space-y-4 reveal">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <button class="w-full flex items-center justify-between p-4 text-left transition-colors hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-400 mr-4">01</span>
+                                <span class="font-semibold text-gray-800">What payment methods do you accept?</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform transition-transform faq-icon">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-gray-600">We accept all major credit cards (Visa, MasterCard, American Express), UPI payments, net banking, and cash on delivery for your convenience.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <button class="w-full flex items-center justify-between p-4 text-left transition-colors hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-400 mr-4">02</span>
+                                <span class="font-semibold text-gray-800">What is your return policy?</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform transition-transform faq-icon">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-gray-600">We offer a 30-day return policy for most items. Products must be unused and in their original packaging. Please keep your receipt for any returns or exchanges.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <button class="w-full flex items-center justify-between p-4 text-left transition-colors hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-400 mr-4">03</span>
+                                <span class="font-semibold text-gray-800">Do you offer home delivery?</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform transition-transform faq-icon">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-gray-600">Yes, we offer home delivery for all online purchases. Delivery is free for orders above ₹999. For orders below this amount, a nominal delivery fee will be charged based on your location.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <button class="w-full flex items-center justify-between p-4 text-left transition-colors hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-400 mr-4">04</span>
+                                <span class="font-semibold text-gray-800">How can I track my order?</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform transition-transform faq-icon">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-gray-600">Once your order is shipped, you'll receive a tracking number via email and SMS. You can use this number on our website or courier partner's website to track your delivery status.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center reveal">
+                    <p class="text-gray-600">Still have questions? Contact us at</p>
+                    <a href="mailto:support@sbazaarmetro.com" class="text-rose-600 font-semibold hover:text-rose-700">support@sbazaarmetro.com</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 lg:px-6 py-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-xl font-brand text-rose-400 mb-4">SBazaarMetro</h4>
+                    <p class="text-gray-400 text-sm">Fashion for every moment of your life.</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold uppercase text-gray-300 mb-4">Shop</h5>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#categories" class="text-gray-400 hover:text-white transition">Men</a></li>
+                        <li><a href="index.html#categories" class="text-gray-400 hover:text-white transition">Women</a></li>
+                        <li><a href="index.html#categories" class="text-gray-400 hover:text-white transition">Kids</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold uppercase text-gray-300 mb-4">About</h5>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-400 hover:text-white transition">Our Story</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="index.html#store-locator" class="text-gray-400 hover:text-white transition">Store Locator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold uppercase text-gray-300 mb-4">Connect</h5>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/company/s-bazaar-metro" target="_blank" rel="noopener" class="inline-flex items-center justify-center w-12 h-12 bg-white rounded-xl shadow-sm hover:scale-110 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#0A66C2]">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/sbazaar.metro" target="_blank" rel="noopener" class="inline-flex items-center justify-center w-12 h-12 bg-white rounded-xl shadow-sm hover:scale-110 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#E4405F]">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+                <p>&copy; <span id="year"></span> SBazaarMetro. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOpenIcon = document.getElementById('menu-open-icon');
+        const menuCloseIcon = document.getElementById('menu-close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuOpenIcon.classList.toggle('hidden');
+            menuCloseIcon.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuOpenIcon.classList.remove('hidden');
+                menuCloseIcon.classList.add('hidden');
+            });
+        });
+
+        // --- Scroll Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- FAQ Accordion Logic ---
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const button = item.querySelector('button');
+            const answer = item.querySelector('.faq-answer');
+            const icon = item.querySelector('.faq-icon');
+
+            button.addEventListener('click', () => {
+                // Check if this FAQ is already open
+                const isOpen = item.classList.contains('active');
+                
+                // Close all FAQs with animation
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').classList.remove('active');
+                    otherItem.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+                });
+                
+                // If this FAQ wasn't open before, open it with animation
+                if (!isOpen) {
+                    // Add active class to parent for shadow effect
+                    item.classList.add('active');
+                    // Add active class to answer for height/opacity animation
+                    answer.classList.add('active');
+                    // Rotate icon
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+
+            // Add hover effect for icon
+            button.addEventListener('mouseenter', () => {
+                if (!item.classList.contains('active')) {
+                    icon.style.transform = 'rotate(45deg)';
+                }
+            });
+
+            button.addEventListener('mouseleave', () => {
+                if (!item.classList.contains('active')) {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // --- Footer Year ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+    });
+    </script>
+</body>
+</html>
